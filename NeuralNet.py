@@ -81,7 +81,7 @@ def test(dataloader, model, loss_fn):
 if __name__ == '__main__':
     TrainDataset = fd.VietnameseFoodDataset("TrainLabels.csv", "./Train")
 
-    TrainDataLoader = DataLoader(TrainDataset, batch_size=8, shuffle=True, num_workers=4)
+    TrainDataLoader = DataLoader(TrainDataset, batch_size=8, shuffle=True, num_workers=2)
 
     TestDataLoader = DataLoader(TrainDataset, batch_size=8, num_workers=6)
     model = models.vgg16(weights='IMAGENET1K_V1')
@@ -89,18 +89,19 @@ if __name__ == '__main__':
     model = model.to(device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
-    # epoch = 1
+    epoch = 1
 
-    # for t in range(epoch):
-    #     print(f"Epoch {t+1}\n-------------------------------")
-    #     train(TrainDataLoader, model, loss_fn, optimizer)
-    #     test(TestDataLoader, model, loss_fn)
-    # model = models.vgg16(weights='IMAGENET1K_V1')
-    # model.classifier[6] = nn.Linear(4096, 30)
-    model = torch.load('model.pth', weights_only=False)
-    model = model.to(device)
-    loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
-    test(TestDataLoader, model, loss_fn)
+    for t in range(epoch):
+        print(f"Epoch {t+1}\n-------------------------------")
+        train(TrainDataLoader, model, loss_fn, optimizer)
+        test(TestDataLoader, model, loss_fn)
+    model = models.vgg16(weights='IMAGENET1K_V1')
+    model.classifier[6] = nn.Linear(4096, 30)
+
+    # model = torch.load('model.pth', weights_only=False)
+    # model = model.to(device)
+    # loss_fn = nn.CrossEntropyLoss()
+    # optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+    # test(TestDataLoader, model, loss_fn)
     print("Done!")
-    # torch.save(model, 'model.pth')
+    torch.save(model, 'model.pth', weights_only=True)
