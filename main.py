@@ -5,6 +5,10 @@ import torch
 import os
 from torch import nn
 
+num_cpu = os.cpu_count()
+print(f"Number of CPU: {num_cpu}")
+
+
 def parse_arg():
     parser = argparse.ArgumentParser()
     parser.add_argument("--phase", type=str, help="'train' for training, 'eval' for evaluation", choices=['train', 'eval'])
@@ -36,7 +40,7 @@ if __name__ == '__main__':
         image_path = path
         label_path = "TrainLabels.csv"
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
-        TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=8, shuffle=True, num_workers=4)
+        TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
         model = torch.load(args.model, weights_only=False)
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
@@ -57,7 +61,7 @@ if __name__ == '__main__':
         image_path = path
         label_path = "labels.csv"
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
-        TestDataLoader = lha.DataLoader(TestDataset, batch_size=8, num_workers=4)
+        TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
         model = torch.load(args.model, weights_only=False)
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
