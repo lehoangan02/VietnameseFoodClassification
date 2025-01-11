@@ -43,6 +43,12 @@ class VNFNeuNet(nn.Module):
 # loss_fn = nn.CrossEntropyLoss()
 # optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
 
+model = models.vgg16(weights='IMAGENET1K_V1')
+model.classifier[6] = nn.Linear(4096, 30)
+model = model.to(device)
+loss_fn = nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()
@@ -84,11 +90,7 @@ if __name__ == '__main__':
     TrainDataLoader = DataLoader(TrainDataset, batch_size=32, shuffle=True, num_workers=2)
 
     TestDataLoader = DataLoader(TrainDataset, batch_size=32, num_workers=6)
-    model = models.vgg16(weights='IMAGENET1K_V1')
-    model.classifier[6] = nn.Linear(4096, 30)
-    model = model.to(device)
-    loss_fn = nn.CrossEntropyLoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+    
     epoch = 1
 
     for t in range(epoch):

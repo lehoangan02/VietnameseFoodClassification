@@ -1,6 +1,7 @@
 
 import argparse
 import NeuralNet as lha
+from NeuralNet import model
 import torch
 import os
 from torch import nn
@@ -62,7 +63,7 @@ if __name__ == '__main__':
         label_path = "TrainLabels.csv"
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
-        model = torch.load(args.model, weights_only=False)
+        model = torch.load_state_dict('./weights/model5.pth', weights_only=False)
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
