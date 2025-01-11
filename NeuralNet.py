@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     TrainDataLoader = DataLoader(TrainDataset, batch_size=8, shuffle=True, num_workers=4)
 
-    TestDataLoader = DataLoader(TrainDataset, batch_size=8, num_workers=4)
+    TestDataLoader = DataLoader(TrainDataset, batch_size=8, num_workers=6)
     model = models.vgg16(weights='IMAGENET1K_V1')
     model.classifier[6] = nn.Linear(4096, 30)
     model = model.to(device)

@@ -59,7 +59,7 @@ if __name__ == '__main__':
             quit()
         path = args.path
         image_path = path
-        label_path = "labels.csv"
+        label_path = "TrainLabels.csv"
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
         model = torch.load(args.model, weights_only=False)
