@@ -1,0 +1,694 @@
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Image directory:  ./Train
+Length of datset: 16895
+Epoch 1
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.397763  [   32/16895]
+loss: 3.386168  [ 3232/16895]
+loss: 3.383461  [ 6432/16895]
+loss: 3.391969  [ 9632/16895]
+loss: 3.379251  [12832/16895]
+loss: 3.338443  [16032/16895]
+Test Error: 
+ Accuracy: 6.4%, Avg loss: 3.359611
+
+Epoch 2
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.347713  [   32/16895]
+loss: 3.344330  [ 3232/16895]
+loss: 3.388145  [ 6432/16895]
+loss: 3.367061  [ 9632/16895]
+loss: 3.326107  [12832/16895]
+loss: 3.377383  [16032/16895]
+Test Error: 
+ Accuracy: 6.4%, Avg loss: 3.335094
+
+Epoch 3
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.346567  [   32/16895]
+loss: 3.328979  [ 3232/16895]
+loss: 3.402919  [ 6432/16895]
+loss: 3.332171  [ 9632/16895]
+loss: 3.328836  [12832/16895]
+loss: 3.281573  [16032/16895]
+Test Error: 
+ Accuracy: 6.5%, Avg loss: 3.326838
+
+Epoch 4
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.233238  [   32/16895]
+loss: 3.331887  [ 3232/16895]
+loss: 3.278643  [ 6432/16895]
+loss: 3.294550  [ 9632/16895]
+loss: 3.365623  [12832/16895]
+loss: 3.344375  [16032/16895]
+Test Error: 
+ Accuracy: 6.4%, Avg loss: 3.321028
+
+Epoch 5
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.317235  [   32/16895]
+loss: 3.320031  [ 3232/16895]
+loss: 3.402801  [ 6432/16895]
+loss: 3.286737  [ 9632/16895]
+loss: 3.308894  [12832/16895]
+loss: 3.359663  [16032/16895]
+Test Error: 
+ Accuracy: 6.9%, Avg loss: 3.315042
+
+Epoch 6
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.410450  [   32/16895]
+loss: 3.355287  [ 3232/16895]
+loss: 3.287059  [ 6432/16895]
+loss: 3.338147  [ 9632/16895]
+loss: 3.259785  [12832/16895]
+loss: 3.321039  [16032/16895]
+Test Error: 
+ Accuracy: 7.9%, Avg loss: 3.308260
+
+Epoch 7
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.235338  [   32/16895]
+loss: 3.366800  [ 3232/16895]
+loss: 3.299160  [ 6432/16895]
+loss: 3.230392  [ 9632/16895]
+loss: 3.255789  [12832/16895]
+loss: 3.229509  [16032/16895]
+Test Error: 
+ Accuracy: 8.0%, Avg loss: 3.298759
+
+Epoch 8
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.381630  [   32/16895]
+loss: 3.209043  [ 3232/16895]
+loss: 3.228382  [ 6432/16895]
+loss: 3.276938  [ 9632/16895]
+loss: 3.301186  [12832/16895]
+loss: 3.187221  [16032/16895]
+Test Error: 
+ Accuracy: 9.4%, Avg loss: 3.287940
+
+Epoch 9
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.436606  [   32/16895]
+loss: 3.304668  [ 3232/16895]
+loss: 3.202194  [ 6432/16895]
+loss: 3.297879  [ 9632/16895]
+loss: 3.345113  [12832/16895]
+loss: 3.334511  [16032/16895]
+Test Error: 
+ Accuracy: 9.5%, Avg loss: 3.274807
+
+Epoch 10
+-------------------------------
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+Using device: cuda
+VNFNeuNet(
+  (flatten): Flatten(start_dim=1, end_dim=-1)
+  (linear_relu_stack): Sequential(
+    (0): Linear(in_features=30000, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=512, out_features=512, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=512, out_features=512, bias=True)
+    (5): ReLU()
+    (6): Linear(in_features=512, out_features=30, bias=True)
+  )
+)
+loss: 3.187482  [   32/16895]
+loss: 3.380802  [ 3232/16895]
+loss: 3.208759  [ 6432/16895]
+loss: 3.251227  [ 9632/16895]
+loss: 3.336860  [12832/16895]
+loss: 3.204244  [16032/16895]
+Test Error:
+ Accuracy: 10.3%, Avg loss: 3.256648 
+
+Done!
+PS F:\VietnameseFood> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(base) lehoangan@MacbukEir VietnameseFood % python NeuralNet.py
+Image directory:  ./Train
+Length of datset: 16895
+Test Error: 
+ Accuracy: 67.3%, Avg loss: 1.094061 
+
+Done!
