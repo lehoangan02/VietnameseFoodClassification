@@ -53,6 +53,7 @@ class NeuralNetFactory:
                 model = model.to(device)
                 loss_fn = nn.CrossEntropyLoss()
                 optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                return model, loss_fn, optimizer
 
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
@@ -80,11 +81,15 @@ def test(dataloader, model, loss_fn):
     model.eval()
     test_loss, correct = 0, 0
     with torch.no_grad():
-        for X, y in dataloader:
+        for index, (X, y) in enumerate(dataloader):
             X, y = X.to(device), y.to(device)
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
+            if not correct:
+                print(f"Image: {index}")
+                print(f"Prediction: {pred.argmax(1)}")
+                print(f"Actual: {y}")
     test_loss /= num_batches
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")

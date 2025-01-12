@@ -9,3 +9,5 @@ Train.zip
 /Validate
 model5.pth-20250111T235650Z-001.zip
 /myEnv
+/Test
+*.zip

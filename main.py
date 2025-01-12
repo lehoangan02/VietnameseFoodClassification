@@ -1,7 +1,6 @@
 
 import argparse
 import NeuralNet as lha
-from NeuralNet import model
 import torch
 import os
 from torch import nn
@@ -50,7 +49,7 @@ if __name__ == '__main__':
         # label_path = path + "/labels" this will be updated along with the dataset
         image_path = path
         label_path = os.path.join(path, "label/labels.csv")
-        weights_path = './weights/' + args.model
+        weights_path = './weights/' + args.weight
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
 
@@ -68,7 +67,7 @@ if __name__ == '__main__':
         result_file_name = f"model_{args.model}_{args.id}.pth"
         torch.save(model.state_dict(), result_file_name)
     if args.phase == "eval":
-
+        print("Evaluation phase")
         # load data
         if args.model is None:
             print("No model specified")
@@ -76,7 +75,7 @@ if __name__ == '__main__':
         path = args.path
         image_path = os.path.join(path, "images")
         label_path = os.path.join(path, "label/labels.csv")
-        weights_path = './weights/' + args.model
+        weights_path = './weights/' + args.weight
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
 

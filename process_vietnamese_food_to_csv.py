@@ -26,7 +26,11 @@ class FoodProcessor:
         self.leaf = Leaf
         print(f"Leaf: {Leaf}")
     def processToCSV(self, FileName):
-        with open (os.path.join(self.OutputPath, FileName), mode='w', newline='') as File:
+        if not os.path.exists(os.path.join(self.OutputPath, self.leaf)):
+            os.makedirs(self.OutputPath, self.leaf)
+        if not os.path.exists(os.path.join(self.OutputPath, self.leaf, 'label')):
+            os.makedirs(os.path.join(self.OutputPath, self.leaf, 'label'))
+        with open (os.path.join(self.OutputPath, self.leaf, 'label', FileName), mode='w', newline='') as File:
             Writer = csv.writer(File)
             # Writer.writerow(['filename', 'label'])
             for root, dirs, files in os.walk(self.filepath):
@@ -50,7 +54,12 @@ class FoodProcessor:
                 # print(f"Number of files in the folder {LABELS_LIST[index]} is: {count}")
     def renameCumulativelyAndMove(self):
         global FREQUENCY_LIST_TRAIN
-        Directory = os.path.join(self.leaf)
+        Directory = os.path.join(self.filepath)
+        NewFolder = os.path.join(self.OutputPath, self.leaf)
+        if not os.path.exists(NewFolder):
+            os.makedirs(NewFolder)
+        if not os.path.exists(os.path.join(NewFolder, 'images')):
+            os.makedirs(os.path.join(NewFolder, 'images'))
         print(f"File path: {Directory}")
         FileIndex = 1
         for index, label in enumerate(LABELS_LIST):
@@ -61,7 +70,10 @@ class FoodProcessor:
                         old_file_path = os.path.join(root, file)
                         new_file_name = f"{FileIndex}.jpg"
                         FileIndex += 1
-                        new_file_path = os.path.join(root, new_file_name)
+                        print(f"Leaf: {self.leaf}")
+                        new_file_path = os.path.join(self.OutputPath, self.leaf, 'images', new_file_name)
+                        print(f"Old file path: {old_file_path}")
+                        print(f"New file path: {new_file_path}")
                         shutil.copy(old_file_path, new_file_path)
     def processImageToDirectory(self):
         target_dir = os.path.join(self.OutputPath, self.leaf)
@@ -100,8 +112,5 @@ class FoodProcessor:
 Processor = FoodProcessor("./archive/Images/Validate")
 Processor.removeAllError("._")
 Processor.calculateIndexOffset()
-# print(FREQUENCY_LIST_TRAIN)
 Processor.renameCumulativelyAndMove()
-Processor.processToCSV("ValidateLabels.csv")
-
-# Processor.removeErrorDataDirectory("._")
+Processor.processToCSV("labels.csv")
