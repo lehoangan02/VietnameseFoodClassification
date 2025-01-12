@@ -63,7 +63,7 @@ if __name__ == '__main__':
         label_path = "TrainLabels.csv"
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
-        model = torch.load_state_dict('./weights/model5.pth', weights_only=False)
+        model.load_state_dict(torch.load('./weights/model5.pth', weights_only=True))
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
