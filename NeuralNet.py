@@ -88,23 +88,23 @@ def test(dataloader, model, loss_fn):
 if __name__ == '__main__':
     TrainDataset = fd.VietnameseFoodDataset("TrainLabels.csv", "./Train")
 
-    TrainDataLoader = DataLoader(TrainDataset, batch_size=32, shuffle=True, num_workers=2)
+    # TrainDataLoader = DataLoader(TrainDataset, batch_size=32, shuffle=True, num_workers=2)
 
     TestDataLoader = DataLoader(TrainDataset, batch_size=32, num_workers=6)
     
     epoch = 1
 
-    for t in range(epoch):
-        print(f"Epoch {t+1}\n-------------------------------")
-        train(TrainDataLoader, model, loss_fn, optimizer)
-        test(TestDataLoader, model, loss_fn)
-    model = models.vgg16(weights='IMAGENET1K_V1')
-    model.classifier[6] = nn.Linear(4096, 30)
+    # for t in range(epoch):
+    #     print(f"Epoch {t+1}\n-------------------------------")
+    #     train(TrainDataLoader, model, loss_fn, optimizer)
+    #     test(TestDataLoader, model, loss_fn)
+    
+    model.load_state_dict(torch.load('./weights/model5.pth', weights_only=True))
+    model = model.to(device)
+    correct, test_loss = test(TestDataLoader, model, loss_fn)
+    print(f"Accuracy: {correct}")
+    print(f"Test Loss: {test_loss}")
 
-    # model = torch.load('model.pth', weights_only=False)
-    # model = model.to(device)
-    # loss_fn = nn.CrossEntropyLoss()
-    # optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
-    # test(TestDataLoader, model, loss_fn)
     print("Done!")
-    torch.save(model, 'model.pth', weights_only=True)
+    torch.save(model.state_dict(), 'model15.pth')
+    # torch.save(model, 'model.pth', weights_only=True)

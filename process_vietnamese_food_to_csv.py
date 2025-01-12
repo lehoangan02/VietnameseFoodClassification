@@ -38,7 +38,7 @@ class FoodProcessor:
     def calculateIndexOffset(self):
         global FREQUENCY_LIST_TRAIN, LABELS_LIST
         Directory = os.path.join(self.filepath)
-        print(f"File path: {Directory}")
+        # print(f"File path: {Directory}")
         count = 0
         for index, label in enumerate(LABELS_LIST):
             Label_Directory = os.path.join(Directory, label)
@@ -47,10 +47,11 @@ class FoodProcessor:
                     for file in files:
                             count += 1
                 FREQUENCY_LIST_TRAIN[index] = count
-                print(f"Number of files in the folder {LABELS_LIST[index]} is: {count}")
-    def renameCumulatively(self):
+                # print(f"Number of files in the folder {LABELS_LIST[index]} is: {count}")
+    def renameCumulativelyAndMove(self):
         global FREQUENCY_LIST_TRAIN
-        Directory = os.path.join(self.filepath)
+        Directory = os.path.join(self.leaf)
+        print(f"File path: {Directory}")
         FileIndex = 1
         for index, label in enumerate(LABELS_LIST):
             Label_Directory = os.path.join(Directory, label)
@@ -61,7 +62,7 @@ class FoodProcessor:
                         new_file_name = f"{FileIndex}.jpg"
                         FileIndex += 1
                         new_file_path = os.path.join(root, new_file_name)
-                        os.rename(old_file_path, new_file_path)
+                        shutil.copy(old_file_path, new_file_path)
     def processImageToDirectory(self):
         target_dir = os.path.join(self.OutputPath, self.leaf)
         print(f"Target directory: {target_dir}")
@@ -99,9 +100,8 @@ class FoodProcessor:
 Processor = FoodProcessor("./archive/Images/Validate")
 Processor.removeAllError("._")
 Processor.calculateIndexOffset()
-print(FREQUENCY_LIST_TRAIN)
-Processor.renameCumulatively()
+# print(FREQUENCY_LIST_TRAIN)
+Processor.renameCumulativelyAndMove()
 Processor.processToCSV("ValidateLabels.csv")
-Processor.processImageToDirectory()
 
 # Processor.removeErrorDataDirectory("._")
