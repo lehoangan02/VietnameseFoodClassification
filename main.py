@@ -67,7 +67,7 @@ if __name__ == '__main__':
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
-        lha.test(TestDataLoader, model, loss_fn)
+        correct, test_loss = lha.test(TestDataLoader, model, loss_fn)
         print("Evaluation done!")
         if args.id is not None:
             id = args.id
@@ -76,8 +76,8 @@ if __name__ == '__main__':
         result_file_name = f"result_{id}.txt"
         with open(result_file_name, "w") as f:
             f.write(f"ID: {id}\n")
-            f.write(f"Accuracy: {lha.correct}\n")
-            f.write(f"Loss: {lha.test_loss}\n")
+            f.write(f"Accuracy: {correct}\n")
+            f.write(f"Loss: {test_loss}\n")
         
         
     

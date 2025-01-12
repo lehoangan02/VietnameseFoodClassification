@@ -19,8 +19,12 @@ FREQUENCY_LIST_TRAIN = [0] * 30 # number of files in each folder
 class FoodProcessor:
     filepath = ""
     OutputPath = "./"
+    leaf = ""
     def __init__(self, filepath):
         self.filepath = filepath
+        Leaf = os.path.basename(filepath)
+        self.leaf = Leaf
+        print(f"Leaf: {Leaf}")
     def processToCSV(self, FileName):
         with open (os.path.join(self.OutputPath, FileName), mode='w', newline='') as File:
             Writer = csv.writer(File)
@@ -59,7 +63,8 @@ class FoodProcessor:
                         new_file_path = os.path.join(root, new_file_name)
                         os.rename(old_file_path, new_file_path)
     def processImageToDirectory(self):
-        target_dir = os.path.join(self.OutputPath, 'Train')
+        target_dir = os.path.join(self.OutputPath, self.leaf)
+        print(f"Target directory: {target_dir}")
         os.makedirs(target_dir, exist_ok=True)
         for root, dirs, files in os.walk(self.filepath):
             for file in files:
@@ -68,17 +73,19 @@ class FoodProcessor:
                 src_path = os.path.join(root, file)
                 dst_path = os.path.join(target_dir, file)
                 shutil.copy(src_path, dst_path)
-    def removeErrorDataCSV(self, ErrorString):
-        with open (os.path.join(self.OutputPath, "TrainLabels.csv"), mode='r') as File:
+    def removeErrorDataCSV(self, ErrorString, FileName):
+        with open (os.path.join(self.OutputPath, FileName), mode='r') as File:
             Reader = csv.reader(File)
-            with open (os.path.join(self.OutputPath, "FixedLabels.csv"), mode='w', newline='') as File:
+            FileName = FileName.split(".")[0]
+            NewFileName = FileName + "Fixed.csv"
+            with open (os.path.join(self.OutputPath, NewFileName), mode='w', newline='') as File:
                 Writer = csv.writer(File)
                 for row in Reader:
                     if not row[0].startswith(ErrorString):
                         Writer.writerow(row)
         print("Removed all errors.")
     def removeErrorDataDirectory(self, ErrorString):
-        target_dir = os.path.join(self.OutputPath, 'Train')
+        target_dir = os.path.join(self.OutputPath, self.leaf)
         for root, dirs, files in os.walk(target_dir):
             for file in files:
                 if file.startswith(ErrorString):
@@ -89,12 +96,12 @@ class FoodProcessor:
             for file in files:
                 if file.startswith(ErrorString):
                     os.remove(os.path.join(root, file))
-Processor = FoodProcessor("./archive/Images/Train")
-# Processor.removeAllError("._")
+Processor = FoodProcessor("./archive/Images/Validate")
+Processor.removeAllError("._")
 Processor.calculateIndexOffset()
 print(FREQUENCY_LIST_TRAIN)
 Processor.renameCumulatively()
-Processor.processToCSV("TrainLabels.csv")
+Processor.processToCSV("ValidateLabels.csv")
 Processor.processImageToDirectory()
 
 # Processor.removeErrorDataDirectory("._")
