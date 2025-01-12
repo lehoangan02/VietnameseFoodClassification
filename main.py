@@ -28,6 +28,10 @@ if __name__ == '__main__':
     result_path = args.result_path
     if os.path.exists(result_path):
         print("Using existing result path")
+    if args.id is not None:
+        id = args.id
+    elif args.id is None:
+        id = 9999
     if args.phase == "train":
         if args.epoch is None:
             print("Epoch must be specified for train")
@@ -40,9 +44,10 @@ if __name__ == '__main__':
         # label_path = path + "/labels" this will be updated along with the dataset
         image_path = path
         label_path = "TrainLabels.csv"
+        weights_path = './weights/' + args.model
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
-        model = torch.load(args.model, weights_only=False)
+        model.load_state_dict(torch.load(weights_path, weights_only=True))
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
@@ -61,18 +66,15 @@ if __name__ == '__main__':
         path = args.path
         image_path = path
         label_path = "TrainLabels.csv"
+        weights_path = './weights/' + args.model
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
-        model.load_state_dict(torch.load('./weights/model5.pth', weights_only=True))
+        model.load_state_dict(torch.load(weights_path, weights_only=True))
         model = model.to(lha.device)
         loss_fn = nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
         correct, test_loss = lha.test(TestDataLoader, model, loss_fn)
         print("Evaluation done!")
-        if args.id is not None:
-            id = args.id
-        elif args.id is None:
-            id = 25
         result_file_name = f"result_{id}.txt"
         with open(result_file_name, "w") as f:
             f.write(f"ID: {id}\n")
