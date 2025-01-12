@@ -1,0 +1,4 @@
+ID: 9
+Path: ./Validate
+Accuracy: 0.7968815844922039
+Loss: 0.9817452264144854

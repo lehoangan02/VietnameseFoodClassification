@@ -68,7 +68,7 @@ if __name__ == '__main__':
             quit()
         path = args.path
         image_path = path
-        label_path = "TrainLabels.csv"
+        label_path = "ValidateLabels.csv"
         weights_path = './weights/' + args.model
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
@@ -83,6 +83,7 @@ if __name__ == '__main__':
         # print(f"Result file: {result_file_name}")
         with open(result_file_name, "w") as f:
             f.write(f"ID: {id}\n")
+            f.write(f"Path: {path}\n")
             f.write(f"Accuracy: {correct}\n")
             f.write(f"Loss: {test_loss}\n")
         
