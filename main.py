@@ -60,6 +60,9 @@ if __name__ == '__main__':
         torch.save(model, result_file_name)
 
     if args.phase == "eval":
+        result_file_name = f"result_{id}.txt"
+        result_file_name = os.path.join(result_path, result_file_name)
+        print(f"Result file: {result_file_name}")
         if args.model is None:
             print("No model specified")
             quit()
@@ -75,7 +78,9 @@ if __name__ == '__main__':
         optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
         correct, test_loss = lha.test(TestDataLoader, model, loss_fn)
         print("Evaluation done!")
-        result_file_name = f"result_{id}.txt"
+        # result_file_name = f"result_{id}.txt"
+        # result_file_name = os.path.join(result_path, result_file_name)
+        # print(f"Result file: {result_file_name}")
         with open(result_file_name, "w") as f:
             f.write(f"ID: {id}\n")
             f.write(f"Accuracy: {correct}\n")
