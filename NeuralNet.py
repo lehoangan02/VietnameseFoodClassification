@@ -87,7 +87,8 @@ def test(dataloader, model, loss_fn):
             test_loss += loss_fn(pred, y).item()
             correct += (pred.argmax(1) == y).type(torch.float).sum().item()
             if not correct:
-                print(f"Image: {index}")
+                print(f"Batch: {index}")
+                print(f"Range: {index*16} - {(index+1)*16}")
                 print(f"Prediction: {pred.argmax(1)}")
                 print(f"Actual: {y}")
     test_loss /= num_batches
@@ -96,7 +97,7 @@ def test(dataloader, model, loss_fn):
     return correct, test_loss
 
 if __name__ == '__main__':
-    TrainDataset = fd.VietnameseFoodDataset("TrainLabels.csv", "./Train")
+    TrainDataset = fd.VietnameseFoodDataset("./Train/label/lablels.csv", "./Train.images")
 
     TrainDataLoader = DataLoader(TrainDataset, batch_size=32, shuffle=True, num_workers=2)
 

@@ -1,0 +1,88 @@
+ID: 16
+Path: ./Test
+Model: VGG16
+Weights: ./weights/model15_mps.pth
+Accuracy: 0.18277435999206193
+Loss: 14.029023662907264
+Batch: 0
+Range: 0 - 16
+Prediction: tensor([29, 29, 28, 20, 29, 13, 28, 22, 29, 27, 23, 29, 25, 22, 23, 25],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 1
+Range: 16 - 32
+Prediction: tensor([23, 27, 27, 24, 20, 24, 21, 22, 28,  3, 27, 25, 24, 27, 20, 27],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 2
+Range: 32 - 48
+Prediction: tensor([26, 26, 29, 27, 19, 25, 28, 25, 28, 20, 18, 28, 28, 20, 28, 25],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 3
+Range: 48 - 64
+Prediction: tensor([28,  4, 29, 28, 24, 24, 26, 29, 22, 20, 29, 14, 28, 29, 29, 17],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 4
+Range: 64 - 80
+Prediction: tensor([28, 27, 22, 29, 21, 24, 13, 20, 16,  3, 29, 29, 27, 29, 14, 29],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 5
+Range: 80 - 96
+Prediction: tensor([26, 24,  6, 29, 26, 28, 28, 26, 27, 27, 25, 26, 25, 28, 28, 18],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 6
+Range: 96 - 112
+Prediction: tensor([15,  3, 23, 28, 28, 23, 11, 22, 17, 28, 25,  3,  3, 28, 27, 23],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 7
+Range: 112 - 128
+Prediction: tensor([26, 28, 28, 26, 25,  3, 25,  6, 27, 29, 27,  9, 17,  3, 25, 26],
+       device='mps:0')
+Actual: tensor([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device='mps:0')
+Batch: 8
+Range: 128 - 144
+Prediction: tensor([28, 29, 19, 26,  3, 27, 29, 29,  3, 28, 24, 23, 27, 24, 21, 29],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 9
+Range: 144 - 160
+Prediction: tensor([21, 16, 28, 29, 26, 27, 24, 20, 24, 28, 19, 19, 27, 28,  8, 28],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 10
+Range: 160 - 176
+Prediction: tensor([27, 14, 20, 20, 27, 29, 20, 26, 27, 29, 22, 29, 28, 22, 27, 22],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 11
+Range: 176 - 192
+Prediction: tensor([26, 28, 28, 29, 29, 29, 27, 15, 21, 29, 23, 24,  7, 24,  7, 22],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 12
+Range: 192 - 208
+Prediction: tensor([ 2, 26, 25, 27,  8, 29, 26,  3, 17, 22, 26, 27, 19, 20, 20, 27],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 13
+Range: 208 - 224
+Prediction: tensor([27, 21, 23, 27, 18, 25, 25,  3, 29, 24, 14, 29, 29, 24, 28, 28],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 14
+Range: 224 - 240
+Prediction: tensor([27, 27, 23, 25, 26, 28,  8, 26, 28, 22, 17, 28, 15, 27, 23, 26],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Batch: 15
+Range: 240 - 256
+Prediction: tensor([24, 21,  3, 17, 28, 13, 25, 25, 26,  3, 25,  6,  3, 16, 28, 28],
+       device='mps:0')
+Actual: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], device='mps:0')
+Test Error: 
+ Accuracy: 18.3%, Avg loss: 14.029024

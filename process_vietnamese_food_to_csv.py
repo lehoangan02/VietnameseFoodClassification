@@ -18,7 +18,7 @@ print(len(LABELS_INDEX))
 FREQUENCY_LIST_TRAIN = [0] * 30 # number of files in each folder
 class FoodProcessor:
     filepath = ""
-    OutputPath = "./"
+    OUT_PATH = "./"
     leaf = ""
     def __init__(self, filepath):
         self.filepath = filepath
@@ -26,19 +26,22 @@ class FoodProcessor:
         self.leaf = Leaf
         print(f"Leaf: {Leaf}")
     def processToCSV(self, FileName):
-        if not os.path.exists(os.path.join(self.OutputPath, self.leaf)):
-            os.makedirs(self.OutputPath, self.leaf)
-        if not os.path.exists(os.path.join(self.OutputPath, self.leaf, 'label')):
-            os.makedirs(os.path.join(self.OutputPath, self.leaf, 'label'))
-        with open (os.path.join(self.OutputPath, self.leaf, 'label', FileName), mode='w', newline='') as File:
+        if not os.path.exists(os.path.join(self.OUT_PATH, self.leaf)):
+            os.makedirs(self.OUT_PATH, self.leaf)
+        if not os.path.exists(os.path.join(self.OUT_PATH, self.leaf, 'label')):
+            os.makedirs(os.path.join(self.OUT_PATH, self.leaf, 'label'))
+        with open (os.path.join(self.OUT_PATH, self.leaf, 'label', FileName), mode='w', newline='') as File:
             Writer = csv.writer(File)
             # Writer.writerow(['filename', 'label'])
-            for root, dirs, files in os.walk(self.filepath):
+            image_path = os.path.join(self.OUT_PATH, self.leaf, 'images')
+            print(f"Image path: {image_path}")
+            for root, dirs, files in os.walk(os.path.join(self.OUT_PATH, self.filepath)):
+                # print(f"Root: {root}")
                 Label = os.path.basename(root)
+                # print(f"Label: {Label}")
                 if Label in LABELS_LIST:
                     for Name in files:
                         Writer.writerow([Name, LABELS_INDEX[Label]])
-                        # Writer.writerow([Name, Label])
     def calculateIndexOffset(self):
         global FREQUENCY_LIST_TRAIN, LABELS_LIST
         Directory = os.path.join(self.filepath)
@@ -55,7 +58,7 @@ class FoodProcessor:
     def renameCumulativelyAndMove(self):
         global FREQUENCY_LIST_TRAIN
         Directory = os.path.join(self.filepath)
-        NewFolder = os.path.join(self.OutputPath, self.leaf)
+        NewFolder = os.path.join(self.OUT_PATH, self.leaf)
         if not os.path.exists(NewFolder):
             os.makedirs(NewFolder)
         if not os.path.exists(os.path.join(NewFolder, 'images')):
@@ -70,35 +73,37 @@ class FoodProcessor:
                         old_file_path = os.path.join(root, file)
                         new_file_name = f"{FileIndex}.jpg"
                         FileIndex += 1
-                        print(f"Leaf: {self.leaf}")
-                        new_file_path = os.path.join(self.OutputPath, self.leaf, 'images', new_file_name)
-                        print(f"Old file path: {old_file_path}")
-                        print(f"New file path: {new_file_path}")
+                        # print(f"Leaf: {self.leaf}")
+                        new_file_path = os.path.join(self.OUT_PATH, self.leaf, 'images', new_file_name)
+                        # print(f"Old file path: {old_file_path}")
+                        # print(f"New file path: {new_file_path}")
                         shutil.copy(old_file_path, new_file_path)
     def processImageToDirectory(self):
-        target_dir = os.path.join(self.OutputPath, self.leaf)
-        print(f"Target directory: {target_dir}")
-        os.makedirs(target_dir, exist_ok=True)
+        NewFolder = os.path.join(self.OUT_PATH, self.leaf)
+        if not os.path.exists(NewFolder):
+            os.makedirs(NewFolder)
+        if not os.path.exists(os.path.join(NewFolder, 'images')):
+            os.makedirs(os.path.join(NewFolder, 'images'))
+        print(f"Target directory: {NewFolder}")
+        os.makedirs(NewFolder, exist_ok=True)
         for root, dirs, files in os.walk(self.filepath):
             for file in files:
-                if file.startswith("._"):
-                    continue
                 src_path = os.path.join(root, file)
-                dst_path = os.path.join(target_dir, file)
+                dst_path = os.path.join(NewFolder, 'images', file)
                 shutil.copy(src_path, dst_path)
     def removeErrorDataCSV(self, ErrorString, FileName):
-        with open (os.path.join(self.OutputPath, FileName), mode='r') as File:
+        with open (os.path.join(self.OUT_PATH, FileName), mode='r') as File:
             Reader = csv.reader(File)
             FileName = FileName.split(".")[0]
             NewFileName = FileName + "Fixed.csv"
-            with open (os.path.join(self.OutputPath, NewFileName), mode='w', newline='') as File:
+            with open (os.path.join(self.OUT_PATH, NewFileName), mode='w', newline='') as File:
                 Writer = csv.writer(File)
                 for row in Reader:
                     if not row[0].startswith(ErrorString):
                         Writer.writerow(row)
         print("Removed all errors.")
     def removeErrorDataDirectory(self, ErrorString):
-        target_dir = os.path.join(self.OutputPath, self.leaf)
+        target_dir = os.path.join(self.OUT_PATH, self.leaf)
         for root, dirs, files in os.walk(target_dir):
             for file in files:
                 if file.startswith(ErrorString):
@@ -109,8 +114,10 @@ class FoodProcessor:
             for file in files:
                 if file.startswith(ErrorString):
                     os.remove(os.path.join(root, file))
-Processor = FoodProcessor("./archive/Images/Validate")
-Processor.removeAllError("._")
+Processor = FoodProcessor("./archive/Images/Test")
+# Processor.removeAllError("._")
 Processor.calculateIndexOffset()
-Processor.renameCumulativelyAndMove()
+print(FREQUENCY_LIST_TRAIN)
+# Processor.renameCumulativelyAndMove()
+Processor.processImageToDirectory()
 Processor.processToCSV("labels.csv")
