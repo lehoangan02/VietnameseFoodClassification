@@ -15,9 +15,10 @@ def parse_arg():
     parser.add_argument("--phase", type=str, help="'train' for training, 'eval' for evaluation", choices=['train', 'eval'])
     parser.add_argument("--path", type=str, help="path to data")
     parser.add_argument("--epoch", type=int, help="number of training iteration")
-    parser.add_argument("--model", type=str, help="path to model")
+    parser.add_argument("--weight", type=str, help="path to weight")
     parser.add_argument("--result_path", type=str, help="path to training/evaluation result")
     parser.add_argument("--id", type=int, help="ID for reference")
+    parser.add_argument("--model", type=str, help="model name", choices=['VNFNeuNet', 'VGG16', 'DenseNet'])
     args = parser.parse_args()
     return args
 if __name__ == '__main__':
@@ -26,6 +27,9 @@ if __name__ == '__main__':
         print("No result path specified")
         quit()
     result_path = args.result_path
+    if args.model is None:
+        print("No model specified")
+        quit()
     if os.path.exists(result_path):
         print("Using existing result path")
     if args.id is not None:
@@ -33,6 +37,8 @@ if __name__ == '__main__':
     elif args.id is None:
         id = 9999
     if args.phase == "train":
+
+        # load data
         if args.epoch is None:
             print("Epoch must be specified for train")
             quit()
@@ -43,49 +49,58 @@ if __name__ == '__main__':
         # image_path = path + "/images" this will be updated along with the dataset
         # label_path = path + "/labels" this will be updated along with the dataset
         image_path = path
-        label_path = "TrainLabels.csv"
+        label_path = os.path.join(path, "label/labels.csv")
         weights_path = './weights/' + args.model
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
+
+        # set up model
+        model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
         model.load_state_dict(torch.load(weights_path, weights_only=True))
         model = model.to(lha.device)
-        loss_fn = nn.CrossEntropyLoss()
-        optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+        
+        # training
         epoch = args.epoch
         for i in range(epoch):
             print(f"Epoch {i+1}\n-------------------------------")
             lha.train(TrainDataLoader, model, loss_fn, optimizer)
         print("Training done!")
-        result_file_name = f"model_{args.id}.pth"
-        torch.save(model, result_file_name)
-
+        result_file_name = f"model_{args.model}_{args.id}.pth"
+        torch.save(model.state_dict(), result_file_name)
     if args.phase == "eval":
-        result_file_name = f"result_{id}.txt"
-        result_file_name = os.path.join(result_path, result_file_name)
-        print(f"Result file: {result_file_name}")
+
+        # load data
         if args.model is None:
             print("No model specified")
             quit()
         path = args.path
-        image_path = path
-        label_path = "ValidateLabels.csv"
+        image_path = os.path.join(path, "images")
+        label_path = os.path.join(path, "label/labels.csv")
         weights_path = './weights/' + args.model
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
+
+        # set up model
+        model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
         model.load_state_dict(torch.load(weights_path, weights_only=True))
         model = model.to(lha.device)
-        loss_fn = nn.CrossEntropyLoss()
-        optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+
+        # evaluation
         correct, test_loss = lha.test(TestDataLoader, model, loss_fn)
         print("Evaluation done!")
-        # result_file_name = f"result_{id}.txt"
-        # result_file_name = os.path.join(result_path, result_file_name)
-        # print(f"Result file: {result_file_name}")
+
+        # save result
+        result_file_name = f"result_{id}.txt"
+        result_file_name = os.path.join(result_path, result_file_name)
+        print(f"Result file: {result_file_name}")
         with open(result_file_name, "w") as f:
             f.write(f"ID: {id}\n")
             f.write(f"Path: {path}\n")
+            f.write(f"Model: {args.model}\n")
+            f.write(f"Weights: {weights_path}\n")
             f.write(f"Accuracy: {correct}\n")
             f.write(f"Loss: {test_loss}\n")
+        print("Result saved!")
         
         
     

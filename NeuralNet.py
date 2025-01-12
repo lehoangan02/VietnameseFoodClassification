@@ -35,19 +35,24 @@ class VNFNeuNet(nn.Module):
         x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
-
-
-# model = VNFNeuNet().to(device)
-# model = models.vgg16(weights='IMAGENET1K_V1')
-# model.classifier[6] = nn.Linear(4096, 10)
-# loss_fn = nn.CrossEntropyLoss()
-# optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
-
-model = models.vgg16(weights='IMAGENET1K_V1')
-model.classifier[6] = nn.Linear(4096, 30)
-model = model.to(device)
-loss_fn = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+class NeuralNetFactory:
+    def __init(self):
+        pass
+    def create(self, model_name):
+        match model_name:
+            case "VNFNeuNet":
+                model = VNFNeuNet().to(device)
+                model = models.vgg16(weights='IMAGENET1K_V1')
+                model.classifier[6] = nn.Linear(4096, 10)
+                loss_fn = nn.CrossEntropyLoss()
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                return model, loss_fn, optimizer
+            case "VGG16":
+                model = models.vgg16(weights='IMAGENET1K_V1')
+                model.classifier[6] = nn.Linear(4096, 30)
+                model = model.to(device)
+                loss_fn = nn.CrossEntropyLoss()
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
 
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
@@ -93,7 +98,7 @@ if __name__ == '__main__':
     TestDataLoader = DataLoader(TrainDataset, batch_size=32, num_workers=2)
     
     epoch = 15
-
+    model, loss_fn, optimizer = NeuralNetFactory().create("VGG16")
     for t in range(epoch):
         print(f"Epoch {t+1}\n-------------------------------")
         train(TrainDataLoader, model, loss_fn, optimizer)
