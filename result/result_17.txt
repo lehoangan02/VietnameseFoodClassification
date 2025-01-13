@@ -1,0 +1,6 @@
+ID: 17
+Path: ./Validate
+Model: VGG16
+Weights: ./weights/model_VGG16_18.pth
+Accuracy: 0.7416772018541931
+Loss: 1.0996980820565616

@@ -11,7 +11,7 @@ print(f"Number of CPU: {num_cpu}")
 
 def parse_arg():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--phase", type=str, help="'train' for training, 'eval' for evaluation", choices=['train', 'eval'])
+    parser.add_argument("--phase", type=str, help="'train' for training, 'eval' for evaluation", choices=['train', 'eval', 'test'])
     parser.add_argument("--path", type=str, help="path to data")
     parser.add_argument("--epoch", type=int, help="number of training iteration")
     parser.add_argument("--weight", type=str, help="path to weight")
@@ -47,15 +47,15 @@ if __name__ == '__main__':
         path = args.path
         # image_path = path + "/images" this will be updated along with the dataset
         # label_path = path + "/labels" this will be updated along with the dataset
-        image_path = path
+        image_path = os.path.join(path, 'images')
         label_path = os.path.join(path, "label/labels.csv")
-        weights_path = './weights/' + args.weight
+        # weights_path = './weights/' + args.weight
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        model.load_state_dict(torch.load(weights_path, weights_only=True))
+        # model.load_state_dict(torch.load(weights_path, weights_only=True))
         model = model.to(lha.device)
         
         # training
@@ -76,6 +76,7 @@ if __name__ == '__main__':
         image_path = os.path.join(path, "images")
         label_path = os.path.join(path, "label/labels.csv")
         weights_path = './weights/' + args.weight
+        print(f"Image path: {image_path}")
         TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
 
@@ -85,7 +86,7 @@ if __name__ == '__main__':
         model = model.to(lha.device)
 
         # evaluation
-        correct, test_loss = lha.test(TestDataLoader, model, loss_fn)
+        correct, test_loss = lha.eval(TestDataLoader, model, loss_fn)
         print("Evaluation done!")
 
         # save result
@@ -100,6 +101,28 @@ if __name__ == '__main__':
             f.write(f"Accuracy: {correct}\n")
             f.write(f"Loss: {test_loss}\n")
         print("Result saved!")
-        
+    if args.phase == 'test':
+        print("Test phase")
+        # load data
+        if args.model is None:
+            print("No model specified")
+            quit()
+        path = args.path
+        image_path = os.path.join(path, "images")
+        label_path = os.path.join(path, "label/labels.csv")
+        weights_path = './weights/' + args.weight
+        print(f"Image path: {image_path}")
+        TestDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
+        TestDataLoader = lha.DataLoader(TestDataset, batch_size=16, num_workers=num_cpu)
+
+        # set up model
+        model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
+        model.load_state_dict(torch.load(weights_path, weights_only=True))
+        model = model.to(lha.device)
+
+        # test
+        lha.test(TestDataLoader, model, loss_fn)
+        print("Test done!")
+        print("Result saved!")
         
     

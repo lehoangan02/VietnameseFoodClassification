@@ -5,6 +5,7 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor
 import torchvision.models as models
 from torchvision import transforms
+import csv
 
 import food_dataset as fd
 
@@ -75,7 +76,7 @@ def train(dataloader, model, loss_fn, optimizer):
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
-def test(dataloader, model, loss_fn):
+def eval(dataloader, model, loss_fn):
     size = len(dataloader.dataset)
     num_batches = len(dataloader)
     model.eval()
@@ -96,8 +97,23 @@ def test(dataloader, model, loss_fn):
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
     return correct, test_loss
 
+def test(dataloader, model, loss_fn):
+    file_path = './TestResult.csv'
+    size = len(dataloader.dataset)
+    num_batches = len(dataloader)
+    model.eval()
+    with open(file_path, mode='w', newline='') as File:
+        Writer = csv.writer(File)
+        # Writer.writerow(['filename', 'label'])
+        with torch.no_grad():
+            for index, (X, y) in enumerate(dataloader):
+                X, y = X.to(device), y.to(device)
+                pred = model(X)
+                for i in range(len(pred)):
+                    Writer.writerow([f"{index*16 + i}.jpg", pred.argmax(1)[i].item()])
+
 if __name__ == '__main__':
-    TrainDataset = fd.VietnameseFoodDataset("./Train/label/lablels.csv", "./Train.images")
+    TrainDataset = fd.VietnameseFoodDataset("./Train/label/lablels.csv", "./Train/images")
 
     TrainDataLoader = DataLoader(TrainDataset, batch_size=32, shuffle=True, num_workers=2)
 
@@ -108,7 +124,7 @@ if __name__ == '__main__':
     for t in range(epoch):
         print(f"Epoch {t+1}\n-------------------------------")
         train(TrainDataLoader, model, loss_fn, optimizer)
-        test(TestDataLoader, model, loss_fn)
+        eval(TestDataLoader, model, loss_fn)
     # model = models.vgg16(weights='IMAGENET1K_V1')
     # model.classifier[6] = nn.Linear(4096, 30)
 

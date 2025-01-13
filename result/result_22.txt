@@ -1,0 +1,6 @@
+ID: 22
+Path: ./Test
+Model: VGG16
+Weights: ./weights/model15.pth
+Accuracy: 0.7757491565786863
+Loss: 1.1344541364008964

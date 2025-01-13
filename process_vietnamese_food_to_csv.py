@@ -15,7 +15,7 @@ LABELS_LIST = ["Banh beo", "Banh bot loc", "Banh can", "Banh canh",
 LABELS_INDEX = {label: index for index, label in enumerate(LABELS_LIST)}
 print(len(LABELS_INDEX))
 
-FREQUENCY_LIST_TRAIN = [0] * 30 # number of files in each folder
+FREQUENCY_LIST = [0] * 30 # number of files in each folder
 class FoodProcessor:
     filepath = ""
     OUT_PATH = "./"
@@ -43,7 +43,7 @@ class FoodProcessor:
                     for Name in files:
                         Writer.writerow([Name, LABELS_INDEX[Label]])
     def calculateIndexOffset(self):
-        global FREQUENCY_LIST_TRAIN, LABELS_LIST
+        global FREQUENCY_LIST, LABELS_LIST
         Directory = os.path.join(self.filepath)
         # print(f"File path: {Directory}")
         count = 0
@@ -53,10 +53,10 @@ class FoodProcessor:
                 for root, dirs, files in os.walk(Label_Directory):
                     for file in files:
                             count += 1
-                FREQUENCY_LIST_TRAIN[index] = count
+                FREQUENCY_LIST[index] = count
                 # print(f"Number of files in the folder {LABELS_LIST[index]} is: {count}")
     def renameCumulativelyAndMove(self):
-        global FREQUENCY_LIST_TRAIN
+        global FREQUENCY_LIST
         Directory = os.path.join(self.filepath)
         NewFolder = os.path.join(self.OUT_PATH, self.leaf)
         if not os.path.exists(NewFolder):
@@ -78,6 +78,28 @@ class FoodProcessor:
                         # print(f"Old file path: {old_file_path}")
                         # print(f"New file path: {new_file_path}")
                         shutil.copy(old_file_path, new_file_path)
+    def __findLabel(self, FileName):
+        file_index = FileName.split(".")[0]
+        largest = 0
+        for index, label in reversed(list(enumerate(FREQUENCY_LIST))):
+            if FREQUENCY_LIST[index] > int(file_index):
+                largest = index
+        return largest
+                
+    def processCumulativeToCSV(self):
+        if not os.path.exists(os.path.join(self.OUT_PATH, self.leaf)):
+            os.makedirs(self.OUT_PATH, self.leaf)
+        if not os.path.exists(os.path.join(self.OUT_PATH, self.leaf, 'label')):
+            os.makedirs(os.path.join(self.OUT_PATH, self.leaf, 'label'))
+        image_path = os.path.join(self.OUT_PATH, self.leaf, 'images')
+        with open (os.path.join(self.OUT_PATH, self.leaf, 'label', 'labels.csv'), mode='w', newline='') as File:
+            for root, dirs, files in os.walk(image_path):
+                for file in files:
+                    print(f"Processing {file}")
+                    Writer = csv.writer(File)
+                    label = self.__findLabel(file)
+                    Writer.writerow([file, label])
+
     def processImageToDirectory(self):
         NewFolder = os.path.join(self.OUT_PATH, self.leaf)
         if not os.path.exists(NewFolder):
@@ -88,6 +110,8 @@ class FoodProcessor:
         os.makedirs(NewFolder, exist_ok=True)
         for root, dirs, files in os.walk(self.filepath):
             for file in files:
+                if file == "11403.jpg":
+                    print(f"Processing {file}")
                 src_path = os.path.join(root, file)
                 dst_path = os.path.join(NewFolder, 'images', file)
                 shutil.copy(src_path, dst_path)
@@ -117,7 +141,9 @@ class FoodProcessor:
 Processor = FoodProcessor("./archive/Images/Test")
 # Processor.removeAllError("._")
 Processor.calculateIndexOffset()
-print(FREQUENCY_LIST_TRAIN)
+print(FREQUENCY_LIST)
+print(LABELS_INDEX)
 # Processor.renameCumulativelyAndMove()
-Processor.processImageToDirectory()
-Processor.processToCSV("labels.csv")
+Processor.processCumulativeToCSV()
+# Processor.processImageToDirectory()
+# Processor.processToCSV("labels.csv")
