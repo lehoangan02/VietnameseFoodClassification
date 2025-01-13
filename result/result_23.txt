@@ -1,0 +1,14 @@
+ID: 23
+Path: ./Test
+Model: VGG16
+Weights: ./weights/model15.pth
+Accuracy: 0.7346695772970827
+Loss: 1.5624056640892665
+Note:   from:   
+                transforms.Resize((224, 224)),
+                transforms.ToTensor()
+        to:
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
