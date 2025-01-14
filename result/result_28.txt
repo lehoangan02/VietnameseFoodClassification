@@ -1,0 +1,6 @@
+ID: 28
+Path: ./Validate
+Model: DenseNet
+Weights: ./weights/model_DenseNet_27.pth
+Accuracy: 0.8263801095659503
+Loss: 0.6214484540564352

@@ -55,6 +55,20 @@ class NeuralNetFactory:
                 loss_fn = nn.CrossEntropyLoss()
                 optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
                 return model, loss_fn, optimizer
+            case "DenseNet":
+                model = models.densenet121(weights='IMAGENET1K_V1')
+                model.classifier = nn.Linear(1024, 30)
+                model = model.to(device)
+                loss_fn = nn.CrossEntropyLoss()
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                return model, loss_fn, optimizer
+            case "ResNet":
+                model = models.resnet152(weights='IMAGENET1K_V1')
+                model.fc = nn.Linear(2048, 30)
+                model = model.to(device)
+                loss_fn = nn.CrossEntropyLoss()
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                return model, loss_fn, optimizer
 
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
@@ -86,8 +100,9 @@ def eval(dataloader, model, loss_fn):
             X, y = X.to(device), y.to(device)
             pred = model(X)
             test_loss += loss_fn(pred, y).item()
-            correct += (pred.argmax(1) == y).type(torch.float).sum().item()
-            if not correct:
+            correct_predictions = (pred.argmax(1) == y).type(torch.float).sum().item()
+            correct += correct_predictions
+            if correct_predictions < len(y):
                 print(f"Batch: {index}")
                 print(f"Range: {index*16} - {(index+1)*16}")
                 print(f"Prediction: {pred.argmax(1)}")

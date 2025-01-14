@@ -1,0 +1,6 @@
+ID: 26
+Path: ./Train
+Model: DenseNet
+Weights: ./weights/model_DenseNet_26.pth
+Accuracy: 0.03219887540692513
+Loss: 3.5191715025540553

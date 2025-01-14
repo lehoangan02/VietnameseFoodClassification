@@ -17,7 +17,8 @@ def parse_arg():
     parser.add_argument("--weight", type=str, help="path to weight")
     parser.add_argument("--result_path", type=str, help="path to training/evaluation result")
     parser.add_argument("--id", type=int, help="ID for reference")
-    parser.add_argument("--model", type=str, help="model name", choices=['VNFNeuNet', 'VGG16', 'DenseNet'])
+    parser.add_argument("--model", type=str, help="model name", choices=['VNFNeuNet', 'VGG16', 'DenseNet', 'ResNet'])
+    parser.add_argument("--resume_train", action='store_true', help="resume training")
     args = parser.parse_args()
     return args
 if __name__ == '__main__':
@@ -49,14 +50,17 @@ if __name__ == '__main__':
         # label_path = path + "/labels" this will be updated along with the dataset
         image_path = os.path.join(path, 'images')
         label_path = os.path.join(path, "label/labels.csv")
-        # weights_path = './weights/' + args.weight
+        if args.weight is None:
+            print("No weight specified")
+        else:
+            weights_path = './weights/' + args.weight
         TrainDataset = lha.fd.VietnameseFoodDataset(label_path, image_path)
         TrainDataLoader = lha.DataLoader(TrainDataset, batch_size=16, shuffle=True, num_workers=num_cpu)
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        # model.load_state_dict(torch.load(weights_path, weights_only=True))
-        model = model.to(lha.device)
+        if (args.resume_train):
+            model.load_state_dict(torch.load(weights_path, weights_only=True))
         
         # training
         epoch = args.epoch
@@ -82,8 +86,9 @@ if __name__ == '__main__':
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        model.load_state_dict(torch.load(weights_path, weights_only=True))
-        model = model.to(lha.device)
+        if (args.resume_train):
+            model.load_state_dict(torch.load(weights_path, weights_only=True))
+            # model = model.to(lha.device)
 
         # evaluation
         correct, test_loss = lha.eval(TestDataLoader, model, loss_fn)
@@ -117,9 +122,11 @@ if __name__ == '__main__':
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        model.load_state_dict(torch.load(weights_path, weights_only=True))
-        model = model.to(lha.device)
-
+        if (args.resume_train):
+            model.load_state_dict(torch.load(weights_path, weights_only=True))
+            # model = model.to(lha.device)
+        else:
+            pass
         # test
         lha.test(TestDataLoader, model, loss_fn)
         print("Test done!")
