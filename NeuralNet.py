@@ -60,14 +60,14 @@ class NeuralNetFactory:
                 model.classifier = nn.Linear(1024, 30)
                 model = model.to(device)
                 loss_fn = nn.CrossEntropyLoss()
-                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
                 return model, loss_fn, optimizer
             case "ResNet":
                 model = models.resnet152(weights='IMAGENET1K_V1')
                 model.fc = nn.Linear(2048, 30)
                 model = model.to(device)
                 loss_fn = nn.CrossEntropyLoss()
-                optimizer = torch.optim.SGD(model.parameters(), lr=1e-2)
+                optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
                 return model, loss_fn, optimizer
 
 def train(dataloader, model, loss_fn, optimizer):

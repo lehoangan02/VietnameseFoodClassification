@@ -1,6 +1,6 @@
 ID: 27
 Path: ./Train
-Model: DenseNet
+Model: DenseNet epoch 3
 Weights: ./weights/model_DenseNet_27.pth
 Accuracy: 0.9675643681562592
 Loss: 0.13181270309602647

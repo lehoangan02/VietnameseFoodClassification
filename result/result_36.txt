@@ -1,0 +1,6 @@
+ID: 36
+Path: ./Validate
+Model: DenseNet epoch 5
+Weights: ./weights/model_DenseNet_35.pth
+Accuracy: 0.8356510745891277
+Loss: 0.6298960937966824

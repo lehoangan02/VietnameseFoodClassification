@@ -1,0 +1,6 @@
+ID: 33
+Path: ./Validate
+Model: ResNet epoch 3
+Weights: ./weights/model_ResNet_30.pth
+Accuracy: 0.8407079646017699
+Loss: 0.5913279579878916

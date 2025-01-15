@@ -67,6 +67,29 @@ if __name__ == '__main__':
         for i in range(epoch):
             print(f"Epoch {i+1}\n-------------------------------")
             lha.train(TrainDataLoader, model, loss_fn, optimizer)
+            if i % 10 == 0:
+                print(f"Epoch {i+1} done!")
+                result_file_name = f"model_{args.model}_{args.id}_epoch_{i+1}.pth"
+                folder = './new_weights/'
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
+                result_file_name = os.path.join(folder, result_file_name)
+                torch.save(model.state_dict(), result_file_name)
+                print(f"Model saved at {result_file_name}")
+            correct, loss = lha.eval(TrainDataLoader, model, loss_fn)
+            print(f"Accuracy: {correct}")
+            print(f"Loss: {loss}")
+            folder = './new_weights/'
+            if not os.path.exists(folder):
+                os.makedirs(folder)
+            eval_file_name = f"eval_{args.model}_{args.id}_epoch_{i+1}.txt"
+            eval_file_name = os.path.join(folder, eval_file_name)
+            with open(eval_file_name, "w") as f:
+                f.write(f"Epoch: {i+1}\n")
+                f.write(f"Accuracy: {correct}\n")
+                f.write(f"Loss: {loss}\n")
+            print(f"Eval result saved at {eval_file_name}")
+
         print("Training done!")
         result_file_name = f"model_{args.model}_{args.id}.pth"
         torch.save(model.state_dict(), result_file_name)
@@ -86,9 +109,8 @@ if __name__ == '__main__':
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        if (args.resume_train):
-            model.load_state_dict(torch.load(weights_path, weights_only=True))
-            # model = model.to(lha.device)
+        model.load_state_dict(torch.load(weights_path, weights_only=True))
+        # model = model.to(lha.device)
 
         # evaluation
         correct, test_loss = lha.eval(TestDataLoader, model, loss_fn)
@@ -122,11 +144,8 @@ if __name__ == '__main__':
 
         # set up model
         model, loss_fn, optimizer = lha.NeuralNetFactory().create(args.model)
-        if (args.resume_train):
-            model.load_state_dict(torch.load(weights_path, weights_only=True))
+        model.load_state_dict(torch.load(weights_path, weights_only=True))
             # model = model.to(lha.device)
-        else:
-            pass
         # test
         lha.test(TestDataLoader, model, loss_fn)
         print("Test done!")

@@ -7,7 +7,7 @@ def CudaToMps(weights_path):
     return new_weights_path
 def MpsToCuda(weights_path):
     weights = torch.load(weights_path, map_location=torch.device('cuda'), weights_only=True)
-    new_weights_path = weights_path.replace("_mps.pth", ".pth")
+    new_weights_path = weights_path.replace(".pth", "_cuda.pth")
     torch.save(weights, new_weights_path)
     print(f"Converted weights saved to {new_weights_path}")
     return new_weights_path
@@ -19,7 +19,7 @@ def CudaToCpu(weights_path):
     return new_weights_path
 def CpuToCuda(weights_path):
     weights = torch.load(weights_path, map_location=torch.device('cuda'), weights_only=True)
-    new_weights_path = weights_path.replace("_cpu.pth", ".pth")
+    new_weights_path = weights_path.replace(".pth", "_cuda.pth")
     torch.save(weights, new_weights_path)
     print(f"Converted weights saved to {new_weights_path}")
     return new_weights_path

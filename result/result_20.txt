@@ -1,6 +1,6 @@
 ID: 20
 Path: ./Test
-Model: VGG16
+Model: VGG16 epoch 8
 Weights: ./weights/model_VGG16_18.pth
 Accuracy: 0.021234371899186345
 Loss: 13.742303110304332

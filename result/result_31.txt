@@ -1,0 +1,7 @@
+ID: 31
+Path: ./Train
+Model: DenseNet
+Weights: ./weights/model_DenseNet_27.pth
+Accuracy: 0.03385617046463451
+Loss: 3.4952733451218316
+Note: wrong code

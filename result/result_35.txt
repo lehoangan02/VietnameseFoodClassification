@@ -1,0 +1,6 @@
+ID: 35
+Path: ./Train
+Model: DenseNet epoch 5
+Weights: ./weights/model_DenseNet_35.pth
+Accuracy: 0.9944954128440368
+Loss: 0.03149619211922761

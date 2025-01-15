@@ -1,6 +1,7 @@
-ID: 28
+ID: 32
 Path: ./Validate
 Model: DenseNet epoch 3
 Weights: ./weights/model_DenseNet_27.pth
-Accuracy: 0.8263801095659503
-Loss: 0.6214484540564352
+Accuracy: 0.027391487568478718
+Loss: 3.4518106463771536
+Note: wrong code

@@ -1,0 +1,7 @@
+ID: 29
+Path: ./Train
+Model: ResNet epoch 2
+Weights: ./weights/model_ResNet_29.pth
+Accuracy: 0.04451021012133767
+Loss: 3.4521297613779702
+Note: wrong code
